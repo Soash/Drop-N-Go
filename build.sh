@@ -2,7 +2,7 @@
 # Exit on error
 set -o errexit
 
-pip install django==4.0.6 whitenoise django-environ pillow requests django-tinymce mysqlclient gunicorn
+pip install pillow requests django-tinymce
 
 python manage.py collectstatic --no-input
 
