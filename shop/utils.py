@@ -3,6 +3,8 @@ import requests
 import base64
 
 def upload_image_to_imgbb(image_path, api_key):
+    if not os.path.exists(image_path):
+        raise FileNotFoundError(f"File not found: {image_path}")
     url = "https://api.imgbb.com/1/upload"
     with open(image_path, "rb") as file:
         encoded_string = base64.b64encode(file.read()).decode('utf-8')
