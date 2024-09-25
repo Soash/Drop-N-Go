@@ -27,10 +27,10 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 if ENVIRONMENT == 'development':
     DEBUG = True
-    ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '*', 'choice-alien-saved.ngrok-free.app']
+    ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '*', 'choice-alien-saved.ngrok-free.app', 'drop-n-go.onrender.com']
 else:
     DEBUG = False
-    ALLOWED_HOSTS = ['bw.etrail.com.bd']
+    ALLOWED_HOSTS = ['bw.etrail.com.bd', 'drop-n-go.onrender.com']
 
 # Application definition
 
@@ -176,10 +176,10 @@ if not DEBUG:
     X_FRAME_OPTIONS = 'DENY'
     SECURE_CONTENT_TYPE_NOSNIFF = True
 
-    CSRF_TRUSTED_ORIGINS = ['https://*.etrail.com.bd']
+    CSRF_TRUSTED_ORIGINS = ['https://*.etrail.com.bd', 'https://drop-n-go.onrender.com']
 else:
     # CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1', 'http://localhost', 'https://choice-alien-saved.ngrok-free.app']
-    CSRF_TRUSTED_ORIGINS = ['https://choice-alien-saved.ngrok-free.app']
+    CSRF_TRUSTED_ORIGINS = ['https://choice-alien-saved.ngrok-free.app', 'https://drop-n-go.onrender.com']
  
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
