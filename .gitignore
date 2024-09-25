@@ -2,3 +2,4 @@ venv/
 tutorial.txt
 .env
 readme_2.txt
+staticfiles/
