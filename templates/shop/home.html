@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="soash">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+
+  {% load static %}
+  <link rel="icon" href="{% static 'favicon.ico' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link rel="stylesheet" href="{% static 'shop/home.css' %}"/>
+  <link rel="stylesheet" href="{% static 'shop/common.css' %}"/>
+  <link rel="stylesheet" href="{% static 'common.css' %}"/>
+</head>
+
+<body>
+
+  <ul>
+    <li><a class="active" href="{% url 'home' %}">Bw eTrail</a></li>
+    <li><a href="{% url 'home' %}">Home</a></li>
+    <li><a href="{% url 'signup' %}">Sign Up</a></li>
+    <li><a href="{% url 'signin' %}">Sign In</a></li>
+    {% if user.is_authenticated %}
+      <li>
+        <a href="{% url 'profile' user.username %}">Profile</a>       
+      </li>
+    {% endif %}
+    {% if user.is_staff %}
+      <li>
+        <a href="{% url 'admintools' %}">Admin Tools</a>
+      </li>
+    {% endif %}
+    <li><a href="{% url 'contact' %}">Contact</a></li>
+    <li><a href="{% url 'about' %}">About</a></li>
+    <li><a href="{% url 'policy' %}">Policy</a></li>
+  </ul>
+
+  {% comment %} 
+    <div class="slide-container">
+    <div class="slide">
+    {% for image in banner %}
+    {% if forloop.first %}
+    <img src="{{ image.imgbb_url }}" class="active">
+    {% else %}
+    <img src="{{ image.imgbb_url }}">
+    {% endif %}
+    {% endfor %}
+    </div>
+    <div class="controllers">
+    <button class="prev"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="next"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+    </div>
+  {% endcomment %}
+
+  <h1>CATEGORIES</h1>
+
+  <div class="category-container">
+    {% for category in categories %}
+    <div class="category">
+
+      <img src="{{ category.imgbb_url }}"/>
+      
+      <a href="category/{{ category.slug }}" class="button-6">{{ category.name }}</a>
+
+    </div>
+    {% endfor %}
+  </div>
+
+  <footer>
+    <span>&copy; 2024 | <a href="https://soash.github.io">Soash</a></span>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{% static 'shop/home.js' %}"></script>
+
+</body>
+</html>
+
+

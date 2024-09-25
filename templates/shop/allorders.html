@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="soash">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Orders</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'common.css' %}">
+    <link rel="stylesheet" href="{% static 'payment/style.css' %}">
+
+    <title>All Orders</title>
+
+    <style>
+    
+    </style>
+</head>
+<body>
+
+    <ul>
+        <li><a class="active" href="{% url 'home' %}">Bw eTrail</a></li>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'signup' %}">Sign Up</a></li>
+        <li><a href="{% url 'signin' %}">Sign In</a></li>
+        {% if user.is_authenticated %}
+        <li>
+          <a href="{% url 'profile' user.username %}">Profile</a>       
+        </li>
+        {% endif %}
+        <li><a href="{% url 'contact' %}">Contact</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'policy' %}">Policy</a></li>
+    </ul>
+
+    <h1>All Orders</h1>
+    <div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Invoice No</th>
+                <th>Invoice Date</th>
+                <th>Reseller</th>
+                <th>Customer Name</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Product Name</th>
+                <th>Product Price</th>
+                <th>Sell Price</th>
+                <th>Quantity</th>
+                <th>Profit</th>
+                
+                <th>Advance</th>
+                <th>Delivery Charge</th>
+                <th>Cash on Delivery</th>
+
+                <th>bKash</th>
+                <th>Amount</th>
+                <th>TrxID</th>
+                <th>Reference</th>
+
+                
+                <th>Profit Status</th>
+                <th>Order Status</th>
+                <th>Change Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.invoice_no }}</td>
+                    <td>{{ order.invoice_date }}</td>
+                    <td><a href="/accounts/{{ order.user }}/">{{ order.user }}</a></td>
+                    <td>{{ order.name }}</td>
+                    <td>{{ order.phone }}</td>
+                    <td>{{ order.address }}</td>
+                    <td><a href="/category/{{ order.product.category.slug }}/{{ order.product.slug }}">{{ order.product_name }}</a></td>
+                    <td>{{ order.product_price }}</td>
+                    <td>{{ order.sell_price }}</td>
+                    <td>{{ order.quantity }}</td>
+                    <td>{{ order.profit }}</td>
+                    <td>{{ order.adv }}</td>
+                    <td>{{ order.delivery_charge }}</td>
+                    <td>{{ order.cod }}</td>
+                    <td>{{ order.bKash }}</td>
+                    <td>{{ order.amount }}</td>
+                    <td>{{ order.trxid }}</td>
+                    <td>{{ order.reference }}</td>
+                    <td>{{ order.get_profit_status_display }}</td>
+    
+                    <td>
+                        <form method="post" action="{% url 'all_orders' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="order_id" value="{{ order.id }}">
+                            <select name="order_status">
+                                <option value="PENDING" {% if order.order_status == 'PENDING' %}selected{% endif %}>Pending</option>
+                                <option value="CONFIRMED" {% if order.order_status == 'CONFIRMED' %}selected{% endif %}>Confirmed</option>
+                            </select>
+                            <button type="submit">Change Status</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form method="post" action="{% url 'all_orders' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="order_id" value="{{ order.id }}">
+                            <select name="delivery_status">
+                                <option value="PROCESSING" {% if order.delivery_status == 'PROCESSING' %}selected{% endif %}>Processing</option>
+                                <option value="DELIVERED" {% if order.delivery_status == 'DELIVERED' %}selected{% endif %}>Delivered</option>
+                                <option value="RETURNED" {% if order.delivery_status == 'RETURNED' %}selected{% endif %}>Returned</option>
+                            </select>
+                            <button type="submit">Change Status</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table></div>
+
+    <footer>
+        <span>&copy; 2024 | <a href="https://soash.github.io">Soash</a></span>
+    </footer>
+
+</body>
+</html>
+
+
+
+
+
+
