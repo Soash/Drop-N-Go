@@ -1,6 +1,5 @@
 venv/
-tutorial.txt
 .env
-readme_2.txt
+tutorial.txt
 info.txt
 staticfiles/
