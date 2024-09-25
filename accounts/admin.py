@@ -17,7 +17,7 @@ class CustomUserAdmin(UserAdmin):
     # admin panel user info interface
     fieldsets = (
         ('User', {'fields': ('username', 'password')}),
-        ('Personal info', {'fields': ('first_name','shopname', 'email', 'phone', 'address', 'is_active', 'reseller_status')}),
+        ('Personal info', {'fields': ('first_name','shopname', 'email', 'phone', 'address', 'is_active', 'reseller_status', 'is_staff', 'is_superuser')}),
         # ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
         ('Important dates', {'fields': ('last_login', 'date_joined', 'activation_date', 'expiry_date')}),
     )
